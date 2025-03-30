@@ -44,9 +44,9 @@ class colors:
 '''
 Helper function for informing user when an option selected in invalid
 '''
-def invalid_option(seconds = 2):
+def invalid_option(seconds = 2, message = "Invalid option, try again."):
     os.system("cls")
-    print("Invalid option, try again.")
+    print(message)
     time.sleep(seconds)
     os.system("cls")
 
