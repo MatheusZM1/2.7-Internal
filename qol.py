@@ -1,11 +1,9 @@
-'''This project is used as a helper file with useful quality of life functions'''
-
+"""This project is used as a helper file with useful quality of life functions"""
 import os, time, random
 
-'''
-Helper class for formmating colour of strings
-'''
-class colors:
+
+class Colors:
+    """Helper class for formmating colour of strings."""
     reset = '\033[0m'
     bold = '\033[01m'
     disable = '\033[02m'
@@ -41,19 +39,17 @@ class colors:
         cyan = '\033[46m'
         lightgrey = '\033[47m'
 
-'''
-Helper function for informing user when an option selected in invalid
-'''
+
 def invalid_option(seconds = 2, message = "Invalid option, try again."):
+    """Helper function for informing user when an option selected in invalid."""
     os.system("cls")
     print(message)
     time.sleep(seconds)
     os.system("cls")
 
-'''
-Helper function for retrieving a positive integer from the user
-'''
+
 def get_pos_int(message, seconds = 2):
+    """Helper function for retrieving a positive integer from the user"""
     while True:
         try:
             user_pos_int = int(input(message))
@@ -64,10 +60,9 @@ def get_pos_int(message, seconds = 2):
         except ValueError:
             invalid_option(seconds)
 
-'''
-Helper function for retrieving an integer from the user
-'''
+
 def get_int(message, seconds = 2):
+    """Helper function for retrieving an integer from the user"""
     while True:
         try:
             user_int = int(input(message))
@@ -75,10 +70,9 @@ def get_int(message, seconds = 2):
         except ValueError:
             invalid_option(seconds)
 
-'''
-Helper function for retrieving a positive float from the user
-'''
+
 def get_pos_float(message, seconds = 2):
+    """Helper function for retrieving a positive float from the user"""
     while True:
         try:
             user_pos_int = float(input(message))
@@ -89,10 +83,9 @@ def get_pos_float(message, seconds = 2):
         except ValueError:
             invalid_option(seconds)
 
-'''
-Helper function for retrieving a float from the user
-'''
+
 def get_float(message, seconds = 2):
+    """Helper function for retrieving a float from the user"""
     while True:
         try:
             user_float = float(input(message))
@@ -100,10 +93,9 @@ def get_float(message, seconds = 2):
         except ValueError:
             invalid_option(seconds)
 
-'''
-Helper function for retrieving a string (with only letters) from the user
-'''
+
 def get_string(message, seconds = 2):
+    """Helper function for retrieving a string (with only letters) from the user"""
     while True:
         user_str = input(message)
         if not user_str.isalpha():
