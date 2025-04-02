@@ -31,7 +31,8 @@ CHECKPOINT_STRING = "\n\n> ..."
 
 def display_stats(orders_complete, total_revenue, order_revenue, customer_complaints, complaints_increase):
     """Display stats (used after serving a customer)."""
-    print(f"Orders Complete: {str(orders_complete)} (+1)\nCash Register: {Colors.fg.green}${total_revenue:.2f} (+${order_revenue:.2f}){Colors.reset}\nCustomer Complaints: {Colors.fg.red}{str(customer_complaints)} (+{complaints_increase})")
+    print("New Stats:\n")
+    print(f"Orders Complete: {str(orders_complete)} (+1)\nCash Register: {Colors.fg.green}${total_revenue:.2f} (+${order_revenue:.2f}){Colors.reset}\nCustomer Complaints: {Colors.fg.red}{str(customer_complaints)} (+{complaints_increase}){Colors.reset}")
 
 
 def reveal_message(message, clear_screen=True):
@@ -53,7 +54,7 @@ def initialise():
     """
     os.system("cls")
     while True:
-        user_input = get_int("System settings corrupt, new settings required:\n\nText speed:\n(1) - 1x\n(2) - 2x\n(3) - 4x\n\n> ")
+        user_input = get_int("System settings corrupt, new settings required:\n\nText speed:\n(1) - 1x\n(2) - 2x\n(3) - 4x\n(4) - Instant\n\n> ")
         if user_input in [1, 2, 3, 4]:
             text_delay = [0.05, 0.025, 0.01, 0]
             global TEXT_DELAY
