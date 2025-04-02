@@ -25,26 +25,13 @@ class Pizza:
         return f"{self.amount} {self.size} {self.pizza_type} with {self.crust_type} : ${self.price:.2f}"
 
 
-class Drink:
-    """Represents a drink."""
-
-    def __init__(self, drink_type, size):
-        """Initiate a drink object with given arguments."""
-        self.drink_type = drink_type
-        self.size = size
-
-    def __repr__(self):
-        """Display a drink object's information neatly, exists for debugging purposes."""
-        return f"{self.size} {self.pizza_type}"
-
-
 TEXT_DELAY = 0.05
 CHECKPOINT_STRING = "\n\n> ..."
 
 
-def display_stats(orders_complete, order_increase, total_revenue, order_revenue):
+def display_stats(orders_complete, total_revenue, order_revenue, customer_complaints, complaints_increase):
     """Display stats (used after serving a customer)."""
-    print(f"Orders Complete: {str(orders_complete)} (+{order_increase})\nCash Register: {Colors.fg.green}${total_revenue:.2f} (+${order_revenue:.2f}){Colors.reset}")
+    print(f"Orders Complete: {str(orders_complete)} (+1)\nCash Register: {Colors.fg.green}${total_revenue:.2f} (+${order_revenue:.2f}){Colors.reset}\nCustomer Complaints: {Colors.fg.red}{str(customer_complaints)} (+{complaints_increase})")
 
 
 def reveal_message(message, clear_screen=True):
@@ -80,8 +67,8 @@ def initialise():
     input(CHECKPOINT_STRING)
     reveal_message("Your job is to take every customer's order, process their payments, and ensure they have a wonderful experience here at Peppy's Pizza Shack.")
     input(CHECKPOINT_STRING)
-    reveal_message("As a new employee, a training video teaching you how to do your job will be avaiable for your viewing.")
-    reveal_message(f"Watch it carefully, as we take customer complaints very {Colors.fg.yellow}seriously.{Colors.reset}", False)
+    reveal_message("As a new employee, we will be monitoring your work today.")
+    reveal_message(f"Take orders very carefully, as we take customer complaints very {Colors.fg.yellow}seriously.{Colors.reset}", False)
     input(CHECKPOINT_STRING)
     reveal_message("Get to work.")
     input(CHECKPOINT_STRING)
@@ -136,16 +123,17 @@ def get_pizza(AVAILABLE_PIZZAS, AVAILABLE_PIZZA_SIZES, AVAILABLE_PIZZA_CRUSTS):
 
 def main():
     """This is the main function for this project, as the core project loop resides within this function."""
-    CUSTOMER_NAMES = ["Josh", "Joey", "Angelina", "Cameron", "Nathaniel", "Hugo", "Tomi", ""]
-    AVAILABLE_PIZZAS = [["Pepperoni Pizza", 10.99], ["Neapolitan Pizza", 14.99]]
+    CUSTOMER_NAMES = ["Josh", "Joey", "Hugo", "Cameron", "Nathaniel", "Angelina", "Tomi", "July", "Alice", "Lily", "Holley"]
+    AVAILABLE_PIZZAS = [["Pepperoni Pizza", 10.99], ["Neapolitan Pizza", 12.99], ["Margherita Pizza", 9.99], ["BBQ Chicken Pizza", 14.99], ["Meat Lovers Pizza", 17.99], ["Hawaiian Pizza", 10.99], ["Buffalo Chicken Pizza", 14.99]]
     AVAILABLE_PIZZA_SIZES = [["Small", 0], ["Medium", 1.99], ["Large", 2.99]]
-    AVAILABLE_PIZZA_CRUSTS = [["Regular Crust", 0], ["Stuffed Crust", 0.99], ["Gluten Free Crust", 1.29]]
+    AVAILABLE_PIZZA_CRUSTS = [["Regular Crust", 0], ["Stuffed Crust", 0.99], ["Gluten Free Crust", 1.29], ["Thick Crust", 1.99]]
     GREETINGS = ["Hello, please get me", "Oi! Get me", "Good morning. I'd like"]
     MESSAGES = ["Please also get me", "Oh! And also get", "I would also like"]
     FAREWELLS = ["Thanks.", "Took you long enough.", "Thank you."]
     COMPLAINTS = ["I'm outta here.", "How dare you! I'm never coming back!", "That's disappointing... I'm leaving."]
     orders_complete = 0
     total_revenue = 0
+    customer_complaints = 0
     previous_customer_name = ""
     while True:  # Begin project core loop of customers coming in
         while True:
@@ -157,7 +145,7 @@ def main():
             selected_pizza_type = random.choice(AVAILABLE_PIZZAS)
             selected_size = random.choice(AVAILABLE_PIZZA_SIZES)
             selected_crust = random.choice(AVAILABLE_PIZZA_CRUSTS)
-            selected_amount = random.randint(1, 3)
+            selected_amount = random.randint(1, 5)
             total_price = (selected_pizza_type[1] + selected_size[1] + selected_crust[1]) * selected_amount
             selected_pizza = Pizza(selected_pizza_type[0], selected_size[0], selected_crust[0], total_price, selected_amount)
             if selected_pizza in current_customer[1]:  # Prevent customer from ordering duplicate sets of pizzas
@@ -182,16 +170,19 @@ def main():
                 input(CHECKPOINT_STRING)
                 mistake_made = True
                 total_payments = 0
+                customer_complaints += 1
                 break
         if not mistake_made:
             reveal_message(f"{current_customer[0]}: {FAREWELLS[customer_personality_index]}\n")
             input(CHECKPOINT_STRING)
-            orders_complete += 1
             total_revenue += total_payments
+        orders_complete += 1
         os.system("cls")
-        display_stats(orders_complete, 0 if mistake_made else 1, total_revenue, total_payments)
+        display_stats(orders_complete, total_revenue, total_payments, customer_complaints, 1 if mistake_made else 0)
         input(CHECKPOINT_STRING)
         previous_customer_name = current_customer[0]  # Update previous customer name
+        if orders_complete == 10:  # Game ends after 10 orders are completed
+            break
 
 
 initialise()
