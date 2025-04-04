@@ -32,7 +32,7 @@ CHECKPOINT_STRING = "\n\n> ..."
 def display_stats(orders_complete, total_revenue, order_revenue, customer_complaints, complaints_increase):
     """Display stats (used after serving a customer)."""
     print("New Stats:\n")
-    print(f"Orders Complete: {str(orders_complete)} (+1)\nCash Register: {Colors.fg.green}${total_revenue:.2f} (+${order_revenue:.2f}){Colors.reset}\nCustomer Complaints: {Colors.fg.red}{str(customer_complaints)} (+{complaints_increase}){Colors.reset}")
+    print(f"Orders Complete: {str(orders_complete)}/10 (+1)\nCash Register: {Colors.fg.green}${total_revenue:.2f} (+${order_revenue:.2f}){Colors.reset}\nCustomer Complaints: {Colors.fg.red}{str(customer_complaints)} (+{complaints_increase}){Colors.reset}")
 
 
 def reveal_message(message, clear_screen=True):
@@ -122,9 +122,28 @@ def get_pizza(AVAILABLE_PIZZAS, AVAILABLE_PIZZA_SIZES, AVAILABLE_PIZZA_CRUSTS):
     return Pizza(prepared_pizza_type[0], prepared_pizza_size[0], prepared_pizza_crust[0], total_price, prepared_pizza_amount)
 
 
+def ending(total_revenue, customer_complaints):
+    """Determine the ending of the program based on the user's performance at serving customers."""
+    reveal_message("Your shift has finished, and you have served 10 customers...")
+    input(CHECKPOINT_STRING)
+    reveal_message(f"You have received {customer_complaints} customer complaints.")
+    if customer_complaints == 0:  # No customer complaints, ending 1 or 5
+        if total_revenue > 300:  # Business revenue is greater than $300, ending 5
+            reveal_message(f"Due to your spectacular performance here today, we have decided to give you a large promotion.\n\nCongratulations.\n\nEnding 5/5")
+        else:  # Ending 1
+            reveal_message(f"Due to your great performance here today, we have decided to give you a raise.\n\nCongratulations.\n\nEnding 1/5")
+    elif customer_complaints == 1:  # 1 customer complaint, ending 2
+        reveal_message(f"Your performance here today was not great... but, it was also not terrible.\n\nWith that, we will allow you to keep working with us.\n\nEnding 2/5")
+    elif customer_complaints < 9:  # 2 or more customer complaints, ending 3
+        reveal_message(f"Due to your horrific performance here today, we have decided to fire you.\n\nGet out.\n\nEnding 3/5")
+    else:  # 10 customer complaints, ending 4
+        reveal_message(f"Your performance here today was so awful, that we fail to even comprehend how you even pulled it off.\n\nYou are fired, get out.\n\nEnding 4/5")
+    exit()
+
+
 def main():
     """This is the main function for this project, as the core project loop resides within this function."""
-    CUSTOMER_NAMES = ["Josh", "Joey", "Hugo", "Cameron", "Nathaniel", "Angelina", "Tomi", "July", "Alice", "Lily", "Holley"]
+    CUSTOMER_NAMES = ["Josh", "Joey", "Hugo", "Cameron", "Nathaniel", "Angelina", "Tomi", "July", "Alice", "Lily", "Chris", "Daisy"]
     AVAILABLE_PIZZAS = [["Pepperoni Pizza", 10.99], ["Neapolitan Pizza", 12.99], ["Margherita Pizza", 9.99], ["BBQ Chicken Pizza", 14.99], ["Meat Lovers Pizza", 17.99], ["Hawaiian Pizza", 10.99], ["Buffalo Chicken Pizza", 14.99]]
     AVAILABLE_PIZZA_SIZES = [["Small", 0], ["Medium", 1.99], ["Large", 2.99]]
     AVAILABLE_PIZZA_CRUSTS = [["Regular Crust", 0], ["Stuffed Crust", 0.99], ["Gluten Free Crust", 1.29], ["Thick Crust", 1.99]]
@@ -184,6 +203,7 @@ def main():
         previous_customer_name = current_customer[0]  # Update previous customer name
         if orders_complete == 10:  # Game ends after 10 orders are completed
             break
+    ending(total_revenue, customer_complaints)
 
 
 initialise()
