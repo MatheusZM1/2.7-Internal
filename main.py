@@ -2,6 +2,7 @@
 from qol import *
 import random
 import sys
+import math
 
 
 class Pizza:
@@ -18,7 +19,7 @@ class Pizza:
     def __eq__(self, other):
         """Define how pizza objects should be compared."""
         if isinstance(other, Pizza):
-            return self.pizza_type == other.pizza_type and self.size == other.size and self.crust_type == other.crust_type and self.price == other.price and self.amount == other.amount
+            return self.pizza_type == other.pizza_type and self.size == other.size and self.crust_type == other.crust_type and math.isclose(self.price, other.price) and self.amount == other.amount
         return False
 
     def __repr__(self):
