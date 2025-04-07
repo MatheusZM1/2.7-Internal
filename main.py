@@ -1,5 +1,6 @@
 """This program re-creates a pizza ordering experience through the Python terminal for the purpose the 2.7 DIT Internal."""
 from qol import *
+import random
 import sys
 
 
@@ -32,7 +33,7 @@ CHECKPOINT_STRING = "\n\n> ..."
 def display_stats(orders_complete, total_revenue, order_revenue, customer_complaints, complaints_increase):
     """Display stats (used after serving a customer)."""
     print("New Stats:\n")
-    print(f"Orders Complete: {str(orders_complete)}/5 (+1)\nCash Register: {Colors.fg.green}${total_revenue:.2f} (+${order_revenue:.2f}){Colors.reset}\nCustomer Complaints: {Colors.fg.red}{str(customer_complaints)} (+{complaints_increase}){Colors.reset}")
+    print(f"Orders Complete: {str(orders_complete)}/5 (+1)\nCash Register: {Colors.Fg.green}${total_revenue:.2f} (+${order_revenue:.2f}){Colors.reset}\nCustomer Complaints: {Colors.Fg.red}{str(customer_complaints)} (+{complaints_increase}){Colors.reset}")
 
 
 def reveal_message(message, clear_screen=True):
@@ -59,7 +60,7 @@ def initialise():
             text_delay = [0.05, 0.025, 0.01, 0]
             global TEXT_DELAY
             TEXT_DELAY = text_delay[user_input - 1]
-            reveal_message(f"{Colors.fg.green}System settings successfully updated.{Colors.reset}\nStarting program...")
+            reveal_message(f"{Colors.Fg.green}System settings successfully updated.{Colors.reset}\nStarting program...")
             time.sleep(1)
             break
         else:
@@ -69,7 +70,7 @@ def initialise():
     reveal_message("Your job is to take every customer's order, process their payments, and ensure they have a wonderful experience here at Peppy's Pizza Shack.")
     input(CHECKPOINT_STRING)
     reveal_message("As a new employee, we will be monitoring your work today.")
-    reveal_message(f"Take orders very carefully, as we take customer complaints very {Colors.fg.yellow}seriously.{Colors.reset}", False)
+    reveal_message(f"Take orders very carefully, as we take customer complaints very {Colors.Fg.yellow}seriously.{Colors.reset}", False)
     input(CHECKPOINT_STRING)
     reveal_message("Get to work.")
     input(CHECKPOINT_STRING)

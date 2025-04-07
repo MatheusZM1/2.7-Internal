@@ -1,9 +1,11 @@
-"""This project is used as a helper file with useful quality of life functions"""
-import os, time, random
+"""This project is used as a helper file with useful quality of life functions."""
+import os
+import time
 
 
 class Colors:
     """Helper class for formmating colour of strings."""
+
     reset = '\033[0m'
     bold = '\033[01m'
     disable = '\033[02m'
@@ -11,8 +13,10 @@ class Colors:
     reverse = '\033[07m'
     strikethrough = '\033[09m'
     invisible = '\033[08m'
- 
-    class fg:
+
+    class Fg:
+        """Helper class for formatting colour of characters."""
+
         black = '\033[30m'
         red = '\033[31m'
         green = '\033[32m'
@@ -28,8 +32,10 @@ class Colors:
         lightblue = '\033[94m'
         pink = '\033[95m'
         lightcyan = '\033[96m'
- 
-    class bg:
+
+    class Bg:
+        """Helper class for formatting highlight colour of characters."""
+
         black = '\033[40m'
         red = '\033[41m'
         green = '\033[42m'
@@ -40,20 +46,20 @@ class Colors:
         lightgrey = '\033[47m'
 
 
-def invalid_option(seconds = 2, message = "Invalid option, try again."):
-    """Helper function for informing user when an option selected in invalid."""
+def invalid_option(seconds=2, message="Invalid option, try again."):
+    """Inform user when an option selected is invalid."""
     os.system("cls")
     print(message)
     time.sleep(seconds)
     os.system("cls")
 
 
-def get_pos_int(message, seconds = 2):
-    """Helper function for retrieving a positive integer from the user"""
-    while True:
+def get_pos_int(message, seconds=2):
+    """Retrieve a positive integer from user (helper function)."""
+    while True:  # Input validation
         try:
             user_pos_int = int(input(message))
-            if user_pos_int < 0:
+            if user_pos_int < 0:  # Check if integer is negative
                 invalid_option(seconds)
             else:
                 return user_pos_int
@@ -61,9 +67,9 @@ def get_pos_int(message, seconds = 2):
             invalid_option(seconds)
 
 
-def get_int(message, seconds = 2):
-    """Helper function for retrieving an integer from the user"""
-    while True:
+def get_int(message, seconds=2):
+    """Retrieve an integer from user (helper function)."""
+    while True:  # Input validation
         try:
             user_int = int(input(message))
             return user_int
@@ -71,12 +77,12 @@ def get_int(message, seconds = 2):
             invalid_option(seconds)
 
 
-def get_pos_float(message, seconds = 2):
-    """Helper function for retrieving a positive float from the user"""
-    while True:
+def get_pos_float(message, seconds=2):
+    """Retrieve a positive float from user (helper function)."""
+    while True:  # Input validation
         try:
             user_pos_int = float(input(message))
-            if user_pos_int < 0:
+            if user_pos_int < 0:  # Check if float is negative
                 invalid_option(seconds)
             else:
                 return user_pos_int
@@ -84,9 +90,9 @@ def get_pos_float(message, seconds = 2):
             invalid_option(seconds)
 
 
-def get_float(message, seconds = 2):
-    """Helper function for retrieving a float from the user"""
-    while True:
+def get_float(message, seconds=2):
+    """Retrieve a float from user (helper function)."""
+    while True:  # Input validation
         try:
             user_float = float(input(message))
             return user_float
@@ -94,9 +100,9 @@ def get_float(message, seconds = 2):
             invalid_option(seconds)
 
 
-def get_string(message, seconds = 2):
-    """Helper function for retrieving a string (with only letters) from the user"""
-    while True:
+def get_string(message, seconds=2):
+    """Retrieve a string (with only letters) from user (helper function)."""
+    while True:  # Input validation
         user_str = input(message)
         if not user_str.isalpha():
             invalid_option(seconds)
