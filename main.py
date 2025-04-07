@@ -25,7 +25,7 @@ class Pizza:
         return f"{self.amount} {self.size} {self.pizza_type} with {self.crust_type} : ${self.price:.2f}"
 
 
-TEXT_DELAY = 0.05
+TEXT_DELAY = 0.05  # TEXT_DELAY is not a true constant, as it is modified exactly once at the very beginning of the program, but will be treated as one
 CHECKPOINT_STRING = "\n\n> ..."
 
 
@@ -153,6 +153,7 @@ def main():
     AVAILABLE_PIZZAS = [["Pepperoni Pizza", 10.99], ["Neapolitan Pizza", 12.99], ["Margherita Pizza", 9.99], ["BBQ Chicken Pizza", 14.99], ["Meat Lovers Pizza", 17.99], ["Hawaiian Pizza", 10.99], ["Buffalo Chicken Pizza", 14.99]]
     AVAILABLE_PIZZA_SIZES = [["Small", 0], ["Medium", 1.99], ["Large", 2.99]]
     AVAILABLE_PIZZA_CRUSTS = [["Regular Crust", 0], ["Stuffed Crust", 0.99], ["Gluten Free Crust", 1.29], ["Thick Crust", 1.99]]
+    """These 4 lists below should all be of equal length, as each item represents a different personality index"""
     GREETINGS = ["Hello, please get me", "Oi! Get me", "Good morning. I'd like", "Yo, I want", "What's up, I'd like"]
     MESSAGES = ["Please also get me", "Oh! And also get", "I would also like", "Oh and like, maybe also", "I'd also be interested in"]
     FAREWELLS = ["Thanks.", "Took you long enough.", "Thank you.", "Cheers yo.", "Thanks mate."]
