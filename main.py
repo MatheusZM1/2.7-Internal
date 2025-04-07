@@ -170,7 +170,7 @@ def main():
             current_customer = [random.choice(CUSTOMER_NAMES), []]  # Initiate a customer (2D List structed like so: ["Name", [Pizza Obj, Pizza Obj, etc...]])
             if current_customer[0] != previous_customer_name:  # Prevent immediate duplicate customer names (duplicate customers are allowed to come back at a later point)
                 break
-        if orders_complete < 3:  # Determine the number of unique pizzas to randomise for the customer's order based on how far the user has progressed
+        if orders_complete < 4:  # Determine the number of unique pizzas to randomise for the customer's order based on how far the user has progressed
             number_of_pizzas = 1
         elif orders_complete == 4:
             number_of_pizzas = 2
